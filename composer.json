@@ -24,10 +24,5 @@
     "doctrine/cache": "^1.10"
   },
   "minimum-stability": "dev",
-  "prefer-stable": true,
-  "require-dev": {
-    "maximebf/debugbar": "^1.16",
-    "codeception/codeception": "4.*",
-    "codeception/module-asserts": "dev-master"
-  }
+  "prefer-stable": true
 }

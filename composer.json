@@ -1,0 +1,31 @@
+{
+  "name": "pckg-app/frontend",
+  "description": "Frontend pckg package",
+  "homepage": "https://github.com/pckg-app/frontend",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Bojan Rajh",
+      "email": "schtr4jh@schtr4jh.net"
+    }
+  ],
+  "require": {
+    "ext-json": "*",
+    "pckg/framework": "dev-master",
+    "pckg/migrator": "dev-master",
+    "pckg/manager": "dev-master",
+    "pckg/queue": "dev-master",
+    "pckg/helpers-js": "dev-master",
+    "pckg/helpers-less": "dev-master",
+    "pckg/auth": "dev-master",
+    "pckg/translator": "dev-master",
+    "nesbot/carbon": "1.*",
+    "ramsey/uuid": "^4.1",
+    "doctrine/cache": "^1.10"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require-dev": {
+    "maximebf/debugbar": "^1.16"
+  }
+}

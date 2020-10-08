@@ -19,13 +19,15 @@
     "pckg/helpers-less": "dev-master",
     "pckg/auth": "dev-master",
     "pckg/translator": "dev-master",
-    "nesbot/carbon": "1.*",
+    "nesbot/carbon": "2.*",
     "ramsey/uuid": "^4.1",
     "doctrine/cache": "^1.10"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require-dev": {
-    "maximebf/debugbar": "^1.16"
+    "maximebf/debugbar": "^1.16",
+    "codeception/codeception": "4.*",
+    "codeception/module-asserts": "dev-master"
   }
 }

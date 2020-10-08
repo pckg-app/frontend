@@ -1,12 +1,12 @@
 {
   "name": "pckg-app-frontend",
-  "version": "0.0.2a",
+  "version": "0.0.2b",
   "description": "Frontend pckg package",
   "keywords": [
     "package",
     "frontend"
   ],
-  "homepage": "https://github.com/pckg-app/frontend.twig",
+  "homepage": "https://github.com/pckg-app/frontend",
   "bugs": {
     "url": "https://github.com/pckg-app/frontend/issues",
     "email": "schtr4jh@schtr4jh.net"
@@ -24,18 +24,23 @@
   "engineStrict": true,
   "dependencies": {
     "@babel/polyfill": "^7.*",
-    "babel-polyfill": "^6.26.0",
+    "@babel/runtime": "^7.*",
+    "babel-polyfill": "^6.*",
     "jquery": "^2.*",
     "moment": "^2.*",
     "moment-timezone": "^0.5.*",
     "node-sass": "^4.*",
-    "ts-loader": "^6.2.2",
-    "typescript": "^3.8.3",
+    "ts-loader": "^8.*",
+    "typescript": "^4.*",
     "vee-validate": "^2.*",
     "vue": "^2.*",
     "vue-loader": "^15.*",
     "vue-router": "^3.*",
     "vuex": "^3.*",
-    "ws": "^7.2.5"
+    "webpack-git-hash": "^1.*",
+    "webpack-node-externals": "^2.*",
+    "mocha": "^8.*",
+    "mochapack": "^2.*",
+    "clean-webpack-plugin": "^3.*"
   }
 }

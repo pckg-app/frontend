@@ -10,7 +10,14 @@
     }
   ],
   "require": {
+    "php": ">=7.3",
     "ext-json": "*",
+    "ext-curl": "*",
+    "ext-gd": "*",
+    "ext-intl": "*",
+    "ext-mbstring": "*",
+    "ext-xml": "*",
+    "ext-zip": "*",
     "pckg/framework": "dev-master",
     "pckg/migrator": "dev-master",
     "pckg/manager": "dev-master",

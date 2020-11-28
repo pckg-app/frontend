@@ -1,8 +1,13 @@
+/**
+ * Those are all dev requirements.
+ */
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const webpack = require('webpack');
 const WebpackGitHash = require('webpack-git-hash');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 //const nodeExternals = require('webpack-node-externals')
 // const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -116,11 +121,19 @@ module.exports = {
         }),
         new webpack.IgnorePlugin(/\.\/locale$/),
         new WebpackGitHash(),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        })
     ],
     resolve: {
         alias: {
             //'vue$': 'vue/dist/vue.common.js',
-            'vue$': 'vue/dist/vue.esm.js' // 'vue/dist/vue.common.js' for webpack 1
+            'vue$': 'vue/dist/vue.esm.js', // 'vue/dist/vue.common.js' for webpack 1
+            jquery: "jquery/src/jquery",
+            $: "jquery/src/jquery",
+            tinymce: "tinymce/tinymce",
+            Dropzone: "dropzone/dropzone",
         }
     },
     module: {
@@ -131,6 +144,50 @@ module.exports = {
         filename: '[name].js',
         path: __dirname + '/build/js',
         publicPath: '/build/js/'
+    },
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new CssMinimizerPlugin({
+                minimizerOptions: {
+                    preset: [
+                        'default',
+                        {
+                            discardComments: {removeAll: true},
+                        },
+                    ],
+                },
+            }),
+            new TerserPlugin({
+                cache: true,
+                test: /\.js(\?.*)?$/i,
+                //parallel: true,
+                parallel: 4,
+                sourceMap: false,
+                terserOptions: {
+                    ecma: undefined,
+                    warnings: true,
+                    parse: {},
+                    compress: true,
+                    //ecma: 6,
+                    mangle: true,
+                    module: false,
+                    toplevel: false,
+                    nameCache: null,
+                    ie8: false,
+                    keep_classnames: undefined,
+                    keep_fnames: false,
+                    safari10: false,
+                    output: {
+                        comments: false,
+                    },
+                    format: {
+                        comments: false,
+                    },
+                },
+                extractComments: false,
+            })
+        ],
     },
     // externals: [nodeExternals()], // only in cli
 };

@@ -26,6 +26,7 @@
     "pckg/helpers-less": "dev-master",
     "pckg/auth": "dev-master",
     "pckg/translator": "dev-master",
+    "pckg/htmlbuilder": "dev-master",
     "nesbot/carbon": "2.*",
     "ramsey/uuid": "^4.1",
     "doctrine/cache": "^1.10"

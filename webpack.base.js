@@ -43,8 +43,7 @@ const lessLoader = {
         {
             loader: MiniCssExtractPlugin.loader,
             options: {
-                publicPath: '/build/js',
-                hmr: false,
+                publicPath: '/build'
             },
         },
         'css-loader',
@@ -66,8 +65,7 @@ const cssLoader = {
                     // while for ./css/main.css the publicPath will be ../
                     return path.relative(path.dirname(resourcePath), context) + '/';
                 },*/
-                publicPath: '/build/js',
-                hmr: false,
+                publicPath: '/build',
             },
         }, 'css-loader'],
 };
@@ -110,6 +108,9 @@ const babelLoader = {
 module.exports = {
     mode: 'production',
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': 'production'
+        }),
         //new CleanWebpackPlugin(),
         new HardSourceWebpackPlugin(),
         new VueLoaderPlugin(),
@@ -123,7 +124,8 @@ module.exports = {
         new WebpackGitHash(),
         new webpack.ProvidePlugin({
             $: "jquery",
-            jQuery: "jquery"
+            jQuery: "jquery",
+            //process: 'process/browser',
         })
     ],
     resolve: {
@@ -134,15 +136,29 @@ module.exports = {
             $: "jquery/src/jquery",
             tinymce: "tinymce/tinymce",
             Dropzone: "dropzone/dropzone",
-        }
+        },
+        // If you are using node.something: 'empty' replace it with resolve.fallback.something: false.
+        /*fallback: {
+            "fs": false,
+            "tls": false,
+            "net": false,
+            "path": false,
+            "zlib": false,
+            "http": false,
+            "https": false,
+            "stream": false,
+            "crypto": false,
+            "crypto-browserify": false,
+            //"process": false
+        }*/
     },
     module: {
         rules: [vueLoader, cssLoader, urlLoader, esLoader, babelLoader, fontLoader, lessLoader],
     },
+    //target: ['web', 'es5'],
     output: {
         chunkFilename: 'chunk.[contenthash].js',
-        filename: '[name].js',
-        path: process.cwd() + '/build',
+        path: __dirname + '/build',
         publicPath: '/build/'
     },
     optimization: {
@@ -159,12 +175,11 @@ module.exports = {
                 },
             }),
             new TerserPlugin({
-                cache: true,
                 test: /\.js(\?.*)?$/i,
                 //parallel: true,
                 parallel: 4,
-                sourceMap: false,
                 terserOptions: {
+                    sourceMap: false,
                     ecma: undefined,
                     warnings: true,
                     parse: {},
@@ -178,9 +193,6 @@ module.exports = {
                     keep_classnames: undefined,
                     keep_fnames: false,
                     safari10: false,
-                    output: {
-                        comments: false,
-                    },
                     format: {
                         comments: false,
                     },

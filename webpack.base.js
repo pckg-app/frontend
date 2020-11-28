@@ -142,8 +142,8 @@ module.exports = {
     output: {
         chunkFilename: 'chunk.[contenthash].js',
         filename: '[name].js',
-        path: __dirname + '/build/js',
-        publicPath: '/build/js/'
+        path: process.cwd() + '/build',
+        publicPath: '/build/'
     },
     optimization: {
         minimize: true,

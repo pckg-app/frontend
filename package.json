@@ -1,6 +1,6 @@
 {
   "name": "pckg-app-frontend",
-  "version": "0.0.3b",
+  "version": "0.0.3c",
   "description": "Frontend pckg package",
   "keywords": [
     "package",
@@ -26,10 +26,10 @@
     "@babel/polyfill": "^7.*",
     "@babel/runtime": "^7.*",
     "babel-polyfill": "^6.*",
-    "jquery": "^2.*",
+    "jquery": "^3.*",
     "moment": "^2.*",
-    "moment-timezone": "^0.5.*",
-    "node-sass": "^4.*",
+    "moment-timezone": "^0.*",
+    "node-sass": "^5.*",
     "vee-validate": "^2.*",
     "vue": "^2.*",
     "vue-router": "^3.*",

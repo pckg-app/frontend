@@ -131,6 +131,9 @@ module.exports = {
             //process: 'process/browser',
         })
     ],
+    externals: {
+        jquery: 'jQuery',
+    },
     resolve: {
         alias: {
             //'vue$': 'vue/dist/vue.common.js',

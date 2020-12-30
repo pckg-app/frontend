@@ -11,6 +11,9 @@ const TerserPlugin = require('terser-webpack-plugin');
 //const nodeExternals = require('webpack-node-externals')
 // const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
+/**
+ * Load vue-loader for VueJS single-file-components.
+ */
 const vueLoader = {
     test: /\.vue$/,
     use: [{
@@ -25,6 +28,9 @@ const vueLoader = {
     }],
 };
 
+/**
+ * Load babel-loader to transpile .js files.
+ */
 const esLoader = {
     test: /\.js$/,
     exclude: /(node_modules|bower_components)/,
@@ -36,6 +42,9 @@ const esLoader = {
     }],
 };
 
+/**
+ * Load less-loader to extract LESS from .less and .vue files.
+ */
 const lessLoader = {
     test: /\.less$/,
     use: [
@@ -51,6 +60,9 @@ const lessLoader = {
     ]
 };
 
+/**
+ * Load css-loader to extract CSS from .less and .css files.
+ */
 const cssLoader = {
     test: /\.css$/,
     use: ['style-loader',
@@ -67,9 +79,14 @@ const cssLoader = {
                 },*/
                 publicPath: '/build',
             },
-        }, 'css-loader'],
+        },
+        'css-loader'
+    ],
 };
 
+/**
+ * Load url-loader to extract static contents from .less and .css files.
+ */
 const urlLoader = {
     test: /\.(png|jpg|gif|svg)$/,
     loader: 'url-loader',
@@ -78,6 +95,9 @@ const urlLoader = {
     },
 };
 
+/**
+ * Load file-loader to extract fonts from .less and .css files.
+ */
 const fontLoader = {
     test: /.(eot|ttf|otf|svg|woff(2)?)(\?[a-z0-9]+)?$/,
     use: [
@@ -92,17 +112,45 @@ const fontLoader = {
     ]
 };
 
-const babelLoader = {
-    test: /\.js$/,
-    exclude: /node_modules/,
+/**
+ * Load scss for tailwind.
+ */
+const scssLoader = {
+    test: /\.s(c|a)ss$/,
     use: [
-        {
-            loader: 'babel-loader',
-            //options: {
-            //    presets: ['@babel/preset-env', /*'es2015'*/]
-            //}
-        }
-    ]
+        'style-loader',
+        //'css-loader',
+        { loader: 'css-loader', options: { importLoaders: 1 } },
+        /*{
+            loader: "postcss-loader",
+            options: {
+                postcssOptions: {
+                    plugins: [
+                        [
+                            "postcss-preset-env",
+                            {
+                                // Options
+                            },
+                        ],
+                    ],
+                },
+            },
+        },*/
+        'postcss-loader',
+        'sass-loader',
+        /*{
+            loader: 'sass-loader',
+            // Requires sass-loader@^8.0.0
+            options: {
+                implementation: require('sass'),
+                sassOptions: {
+                    fiber: require('fibers'),
+                    indentedSyntax: true, // optional
+                    webpackImporter: true
+                },
+            },
+        },*/
+    ],
 };
 
 module.exports = {
@@ -132,7 +180,7 @@ module.exports = {
         })
     ],
     externals: {
-        jquery: 'jQuery',
+        //jquery: 'jQuery',
     },
     resolve: {
         alias: {
@@ -159,7 +207,7 @@ module.exports = {
         }*/
     },
     module: {
-        rules: [vueLoader, cssLoader, urlLoader, esLoader, babelLoader, fontLoader, lessLoader],
+        rules: [vueLoader, cssLoader, urlLoader, esLoader, fontLoader, lessLoader, scssLoader],
     },
     //target: ['web', 'es5'],
     output: {

@@ -118,8 +118,10 @@ const fontLoader = {
 const scssLoader = {
     test: /\.s(c|a)ss$/,
     use: [
-        'style-loader',
+        // Creates `style` nodes from JS strings
+        MiniCssExtractPlugin.loader,//'style-loader', // MiniCss on prod, style-loader on dev?
         //'css-loader',
+        // // Translates CSS into CommonJS ?
         { loader: 'css-loader', options: { importLoaders: 1 } },
         /*{
             loader: "postcss-loader",
@@ -137,6 +139,7 @@ const scssLoader = {
             },
         },*/
         'postcss-loader',
+        // Compiles Sass to CSS
         'sass-loader',
         /*{
             loader: 'sass-loader',

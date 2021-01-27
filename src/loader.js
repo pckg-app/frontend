@@ -208,7 +208,7 @@ class Loader {
             //target: ['web', 'es5'],
             output: {
                 chunkFilename: 'chunk.[contenthash].js',
-                path: path.resolve(__dirname, '/../..'),
+                path: path.resolve(__dirname, '../../..'),
                 publicPath: this.publicPath + '/'
             },
             optimization: {

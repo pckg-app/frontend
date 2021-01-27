@@ -103,6 +103,10 @@ class Loader {
         });
     }
 
+    get buildOutputPath() {
+        return path.resolve(__dirname, '../../..') + this.buildPath;
+    }
+
     get optimizationMinimizer() {
         if (this.isDev) {
             return [];
@@ -208,7 +212,7 @@ class Loader {
             //target: ['web', 'es5'],
             output: {
                 chunkFilename: 'chunk.[contenthash].js',
-                path: path.resolve(__dirname, '../../..'),
+                path: this.buildOutputPath,
                 publicPath: this.publicPath + '/'
             },
             optimization: {

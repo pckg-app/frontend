@@ -3,8 +3,8 @@ Default set of prod dependencies for pckg.
 
 ## PHP
  - JSON, CURL, GD, Intl, mbstring, XML, ZIP
- - Pckg: Framework, Migrator, Manager, Queue, Helpers (JS/LESS), Auth, Translator
- - Carbon, UUID
+ - Pckg: Framework, Migrator, Manager, Queue, Helpers (JS/LESS), Auth, Translator, Htmlbuilder
+ - Carbon, UUID, Doctrine Cache
 
 `$ composer require pckg-app/frontend`
 

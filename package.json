@@ -1,6 +1,6 @@
 {
   "name": "pckg-app-frontend",
-  "version": "0.0.5d",
+  "version": "0.0.5e",
   "description": "Frontend pckg package",
   "keywords": [
     "package",
@@ -39,6 +39,6 @@
     "mocha": "^8.*",
     "mochapack": "^2.*",
     "clean-webpack-plugin": "^3.*",
-    "pckg-orm": "^0.0.1-d"
+    "pckg-orm": "^0.0.*"
   }
 }

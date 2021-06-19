@@ -33,6 +33,9 @@ class Loader {
         };
         this.packages = packages || [];
         this.loaders = [];
+        this.plugins = {
+            WebpackGitHash: true
+        };
         this.buildPath = this.publicPath = '/build';
         this.mode = Modes.PRODUCTION;
         this.base = {};
@@ -75,9 +78,15 @@ class Loader {
     }
 
     chunk(chunk) {
-        this.$chunk = arguments.length > 0 ? chunk : true;
+        this.$chunk = arguments.length ? chunk : true;
 
         return this;
+    }
+
+    git(enabled) {
+       this.plugins.WebpackGitHash = arguments.length ? enabled : true;
+
+       return this;
     }
 
     setBuildPath(buildPath) {
@@ -151,34 +160,46 @@ class Loader {
         ]
     }
 
+    exportsFn(fn) {
+        return (env) => {
+            return merge(this.exports({}), fn(env));
+        };
+    }
+
     exports(config) {
+        const plugins = [
+            new webpack.DefinePlugin({
+                'process.env': {
+                    NODE_ENV: JSON.stringify(this.mode)
+                },
+                'production': this.mode
+            }),
+            //new CleanWebpackPlugin(),
+            new HardSourceWebpackPlugin(),
+            new VueLoaderPlugin(), // added by vue.js
+            new MiniCssExtractPlugin({
+                // Options similar to the same options in webpackOptions.output
+                // both options are optional
+                filename: '[name].css',
+                chunkFilename: '[contenthash].css',
+            }),
+            new webpack.IgnorePlugin(/\.\/locale$/),
+            // extract?
+            new webpack.ProvidePlugin({
+                //$: "jquery",
+                //jQuery: "jquery",
+                //process: 'process/browser',
+            })
+        ];
+
+        if (this.plugins.WebpackGitHash) {
+            plugins.push(new WebpackGitHash());
+        }
+
         let exp = merge(merge({
             mode: this.mode,
             entry: this.$entry,
-            plugins: [
-                new webpack.DefinePlugin({
-                    'process.env': {
-                        NODE_ENV: JSON.stringify(this.mode)
-                    },
-                    'production': this.mode
-                }),
-                //new CleanWebpackPlugin(),
-                new HardSourceWebpackPlugin(),
-                new VueLoaderPlugin(), // added by vue.js
-                new MiniCssExtractPlugin({
-                    // Options similar to the same options in webpackOptions.output
-                    // both options are optional
-                    filename: '[name].css',
-                    chunkFilename: '[contenthash].css',
-                }),
-                new webpack.IgnorePlugin(/\.\/locale$/),
-                new WebpackGitHash(),
-                new webpack.ProvidePlugin({
-                    $: "jquery",
-                    jQuery: "jquery",
-                    //process: 'process/browser',
-                })
-            ],
+            plugins: plugins,
             externals: {
                 //jquery: 'jQuery',
             },

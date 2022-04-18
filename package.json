@@ -32,7 +32,7 @@
     "mochapack": "^2.*",
     "moment": "^2.*",
     "moment-timezone": "^0.*",
-    "pckg-orm": "^0.0.3",
+    "pckg-orm": "^0.0.5",
     "vee-validate": "^2.*",
     "vue": "^2.*",
     "vue-router": "^3.*",
